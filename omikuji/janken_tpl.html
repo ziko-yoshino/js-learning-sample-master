@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/sample.css">
+    <title>じゃんけん</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>にゃんこ大戦争</h1>
+    </header>
+
+    <main>
+        <ul>
+            <li id="gu_btn">グー</li>
+            <li id="cho_btn">チョキ</li>
+            <li id="par_btn">パー</li>
+        </ul>
+        <div>ボスネコの出した肉球は？「<span id="pc_hands">にゃに？</span>」</div>
+        <div id="judgment"></div>
+        <div id="make_img1" style="display:none;">
+            <img src="すごい泣いてる.gif">
+            <audio id="cry_audio1"><source src="「うええーーーん」.mp3" type="audio/mp3"></audio>
+        </div>
+        <div id="make_img2" style="display:none;">
+            <img src="泣いてるネコ.gif">
+            <audio id="cry_audio2"><source src="「ちょっとマズイかも…」.mp3" type="audio/mp3"></audio>
+        </div> 
+        <div id="aiko_img1" style="display:none;">
+            <img src="虚無ネコ.gif">
+            <audio id="chotto_audio1"><source src="「あとちょっと～！」.mp3" type="audio/mp3"></audio>
+        </div>
+        <div id="aiko_img2" style="display:none;">
+            <img src="びっくりネコ.gif">
+            <audio id="chotto_audio2"><source src="「その調子その調子！」.mp3" type="audio/mp3"></audio>
+        </div>
+        <div id="kachi_img1" style="display:none;">
+            <img src="ハッピーネコ.gif">
+            <audio id="yattane_audio1"><source src="「やったね！」.mp3" type="audio/mp3"></audio>
+        </div>
+        <div id="kachi_img2" style="display:none;">
+            <img src="ちゅぱちゃぷネコ.gif">
+            <audio id="yattane_audio2"><source src="「おおー！」.mp3" type="audio/mp3"></audio>
+        </div>
+    </main>
+
+
+    <footer></footer>
+    <script>
+        $(document).ready(function () {
+            // ぐー、チョキ、パーそれぞれのボタンにクリックイベントを追加
+            $("#gu_btn").click(function () {
+                playGame("グーu");
+            });
+
+            $("#cho_btn").click(function () {
+                playGame("チョキ");
+            });
+
+            $("#par_btn").click(function () {
+                playGame("パー");
+            });
+
+            // じゃんけんの勝敗判定を行う関数
+            function judge(playerHand, computerHand) {
+                if (playerHand === computerHand) {
+                    return "あいこだよ、あとちょっと！";
+                } else if ((playerHand === "グー" && computerHand === "チョキ") ||
+                           (playerHand === "チョキ" && computerHand === "パー") ||
+                           (playerHand === "パー" && computerHand === "グー")) {
+                    return "あなたの勝ち！やったねー！";
+                } else {
+                    return "残念。負けちゃった";
+                }
+            }
+
+            // じゃんけんゲームのメイン処理
+            function playGame(playerHand) {
+                var hands = ["グー", "チョキ", "パー"];
+                var computerHand = hands[Math.floor(Math.random() * hands.length)];
+                var judgment = judge(playerHand, computerHand);
+
+                // コンピュータの手を表示
+                $("#pc_hands").text(computerHand);
+
+                // 勝敗を表示
+                $("#judgment").text(judgment);
+
+                // 負けの場合、結果を表示
+                if (judgment === "残念。負けちゃった") {
+                    var randomIndex = Math.floor(Math.random() * 2) + 1; // 1か2をランダムに選択
+                    $("#make_img" + randomIndex).show();
+                    var cryAudio = document.getElementById("cry_audio" + randomIndex);
+                    cryAudio.play();
+                } else {
+                    $("#make_img1").hide();
+                    $("#make_img2").hide();
+                }
+                // あいこの場合、結果を表示
+                if (judgment === "あいこだよ、あとちょっと！") {
+                    $("#aiko_img1").show();
+                    var randomIndex = Math.floor(Math.random() * 2) + 1; // 1か2をランダムに選択
+                    $("#aiko_img2" + randomIndex).show();
+                    var cryAudio = document.getElementById("chotto_audio" + randomIndex);
+                    cryAudio.play();
+                } else {
+                    $("#aiko_img1").hide();
+                    $("#aiko_img2").hide();
+                }
+                 // 勝ちの場合、結果を表示
+                 if (judgment === "あなたの勝ち！やったねー！") {
+                    $("#kachi_img1").show();
+                    var randomIndex = Math.floor(Math.random() * 2) + 1; // 1か2をランダムに選択
+                    $("#kachi_img2" + randomIndex).show();
+                    var cryAudio = document.getElementById("yattane_audio" + randomIndex);
+                    cryAudio.play();
+                } else {
+                    $("#kachi_img1").hide();
+                    $("#kachi_img2").hide();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

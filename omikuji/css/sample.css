@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px; /* Adjusted for better scaling */
+    text-align: center; /* Center content */
+}
+header{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+main{
+    border-bottom:1px solid #ccc;
+}
+.result-text {
+    font-size: 1.5em; /* Larger text for result */
+    margin: 20px 0; /* Space around result text */
+}
+
+.image-container img {
+    max-width: 100%; /* Ensure images don't overflow */
+    height: auto; /* Maintain aspect ratio */
+}
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    border-bottom:1px solid #fff;
+    height:200px;
+}
+ul{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    list-style-type:none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+li:hover{
+    background: #0066CC;
+    color:#fff;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 14px; /* Smaller font on small screens */
+    }
+
+    .result-text {
+        font-size: 1.2em; /* Adjust result text size for small screens */
+    }
+}
